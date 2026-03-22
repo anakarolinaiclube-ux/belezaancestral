@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Beleza Ancestral — Os rituais que outras culturas guardam a sete chaves</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --black:      #080808;
+            --near-black: #0f0f0f;
+            --charcoal:   #161616;
+            --gold:       #c9a84c;
+            --gold-dim:   #9a7d35;
+            --gold-soft:  rgba(201,168,76,0.12);
+            --gold-glow:  rgba(201,168,76,0.25);
+            --white:      #ffffff;
+            --text-light: #c8c0b4;
+            --text-muted: #6e6560;
+            --serif:      'Cormorant Garamond', serif;
+            --sans:       'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--sans);
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* ── ANIMAÇÕES ── */
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        @keyframes shimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+        }
+        @keyframes flicker {
+            0%,100% { opacity:1; }
+            92%     { opacity:1; }
+            93%     { opacity:0.85; }
+            94%     { opacity:1; }
+            96%     { opacity:0.9; }
+            97%     { opacity:1; }
+        }
+        @keyframes scanline {
+            0%   { top:-10%; }
+            100% { top:110%; }
+        }
+        @keyframes pulse-gold {
+            0%   { box-shadow: 0 0 0 0 var(--gold-glow); }
+            70%  { box-shadow: 0 0 0 16px rgba(201,168,76,0); }
+            100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+        }
+
+        /* ── UTILITÁRIOS ── */
+        .container { width:100%; max-width:720px; margin:0 auto; padding:0 22px; }
+        .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity:1; transform:translateY(0); }
+
+        /* ── BARRA TOPO ── */
+        .alert-bar {
+            background: var(--charcoal);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            color: var(--gold);
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--sans);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            background: var(--black);
+            text-align: center;
+            padding: 80px 22px 64px;
+            overflow: hidden;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-scanline {
+            position: absolute; left:0; right:0; height:1px;
+            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+            animation: scanline 8s linear infinite;
+            pointer-events: none;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset:0;
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 30% at 50% 100%, rgba(201,168,76,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-inner { position:relative; z-index:2; width:100%; }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(201,168,76,0.3);
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin-bottom: 32px;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 8vw, 5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 10px;
+            animation: fadeUp 0.9s 0.1s ease both;
+            letter-spacing: -1px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--gold-dim), var(--gold), #e8c96a, var(--gold), var(--gold-dim));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        .hero-sub-title {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            animation: fadeUp 0.9s 0.2s ease both;
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            max-width: 320px;
+            margin: 0 auto 36px;
+            animation: fadeUp 0.9s 0.3s ease both;
+        }
+        .hero-divider-line { flex:1; height:1px; background: rgba(201,168,76,0.25); }
+        .hero-divider-icon { color: var(--gold); font-size: 0.7rem; }
+
+        .hero p.sub {
+            font-size: 0.97rem;
+            color: var(--text-light);
+            max-width: 520px;
+            margin: 0 auto 44px;
+            font-weight: 300;
+            animation: fadeUp 0.9s 0.35s ease both;
+            line-height: 1.8;
+        }
+        .hero p.sub strong { color: var(--white); font-weight: 600; }
+
+        /* CTA */
+        .btn-cta-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: fadeUp 0.9s 0.45s ease both;
+        }
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 16px 36px;
+            border-radius: 2px;
+            width: 100%;
+            max-width: 440px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            animation: pulse-gold 2.8s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-cta::after {
+            content:'';
+            position:absolute; top:0; left:-100%;
+            width:60%; height:100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-cta:hover { background: #e0ba55; transform: translateY(-1px); }
+        .btn-cta:hover::after { left:150%; }
+        .btn-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-note i { font-size: 0.65rem; color: var(--gold); opacity:0.7; }
+
+        /* Prova social */
+        .social-strip {
+            background: var(--charcoal);
+            border-top: 1px solid rgba(201,168,76,0.1);
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+            padding: 20px 22px;
+            text-align: center;
+        }
+        .social-strip .stars { color: var(--gold); letter-spacing:3px; font-size:0.85rem; margin-bottom:5px; }
+        .social-strip p { font-size:0.82rem; color:var(--text-muted); }
+        .social-strip strong { color: var(--gold); }
+
+        /* ── MISTÉRIO / DOR ── */
+        .mystery-section {
+            background: var(--near-black);
+            padding: 80px 22px;
+            border-bottom: 1px solid rgba(201,168,76,0.08);
+        }
+        .mystery-section p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.85;
+        }
+        .mystery-section p strong { color: var(--white); }
+        .mystery-section p em { color: var(--gold); font-style: italic; }
+
+        .callout {
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 2px;
+            padding: 28px 28px;
+            margin: 36px 0;
+            background: rgba(201,168,76,0.04);
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 1.55;
+            text-align: center;
+        }
+        .callout em { color: var(--gold); font-style: normal; font-weight: 600; }
+
+        /* ── PILARES ── */
+        .pillars-section {
+            background: var(--black);
+            padding: 80px 22px;
+        }
+        .section-label {
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+        .section-title em { font-style: italic; color: var(--gold); }
+        .section-sub {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            max-width: 520px;
+        }
+
+        .pillars-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .pillar-card {
+            border: 1px solid rgba(201,168,76,0.15);
+            border-radius: 2px;
+            overflow: hidden;
+            background: var(--charcoal);
+            transition: border-color 0.3s;
+        }
+        .pillar-card:hover { border-color: rgba(201,168,76,0.4); }
+        .pillar-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 22px;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+            background: rgba(201,168,76,0.04);
+        }
+        .pillar-num {
+            font-family: var(--serif);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: rgba(201,168,76,0.25);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .pillar-flag {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .pillar-title {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.2;
+        }
+        .pillar-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+        .pillar-body { padding: 20px 22px; }
+        .pillar-body p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+        .pillar-reveals {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .pillar-reveals li {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+        .pillar-reveals li::before {
+            content: '✦';
+            color: var(--gold);
+            font-size: 0.55rem;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* ── DEPOIMENTOS ── */
+        .testimonials {
+            background: var(--near-black);
+            padding: 80px 22px;
+            border-top: 1px solid rgba(201,168,76,0.08);
+        }
+        .t-grid { display:flex; flex-direction:column; gap:16px; margin-top:40px; }
+        .t-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 2px;
+            padding: 24px 22px;
+            position: relative;
+        }
+        .t-card::before {
+            content: '"';
+            position: absolute; top:12px; right:18px;
+            font-family: var(--serif);
+            font-size: 4.5rem;
+            color: rgba(201,168,76,0.1);
+            line-height: 1;
+        }
+        .t-stars { color: var(--gold); font-size: 0.72rem; letter-spacing:2px; margin-bottom:10px; }
+        .t-text {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #d8d0c4;
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+        .t-author { display:flex; align-items:center; gap:10px; }
+        .t-avatar {
+            width:36px; height:36px; border-radius:50%;
+            background: var(--charcoal);
+            border: 1px solid rgba(201,168,76,0.3);
+            display:flex; align-items:center; justify-content:center;
+            font-family: var(--serif);
+            font-size:1rem; font-weight:600; color: var(--gold);
+            flex-shrink:0;
+        }
+        .t-name { font-size:0.82rem; font-weight:600; color:var(--white); }
+        .t-detail { font-size:0.72rem; color:var(--text-muted); }
+
+        /* ── OFERTA ── */
+        .offer-section {
+            background: var(--black);
+            padding: 80px 22px;
+        }
+        .offer-box {
+            border: 1px solid rgba(201,168,76,0.25);
+            border-radius: 2px;
+            padding: 48px 36px;
+            text-align: center;
+            background: var(--charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+        .offer-box::before {
+            content:'';
+            position:absolute; top:0; left:0; right:0;
+            height:2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .offer-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.12);
+            color: var(--gold);
+            border: 1px solid rgba(201,168,76,0.3);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+        }
+        .offer-box h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            font-weight: 300;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .offer-box h2 em { font-style:italic; color:var(--gold); }
+        .offer-box > p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            max-width: 440px;
+            margin: 0 auto 36px;
+        }
+        .price-area { margin: 28px 0 32px; }
+        .price-from {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+        .price-main {
+            font-family: var(--serif);
+            font-size: clamp(3.2rem, 10vw, 5rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+            margin: 6px 0;
+        }
+        .price-main sup { font-size:40%; vertical-align:super; color:var(--gold); }
+        .price-main sub { font-size:38%; }
+        .price-note { font-size:0.75rem; color:var(--text-muted); margin-top:6px; }
+        .price-tag {
+            display: inline-block;
+            background: var(--gold-soft);
+            border: 1px solid rgba(201,168,76,0.3);
+            color: var(--gold);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-top: 8px;
+        }
+
+        /* Garantia */
+        .guarantee {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: left;
+        }
+        .guarantee-icon {
+            width:50px; height:50px; border-radius:50%;
+            border: 1.5px solid var(--gold);
+            display:flex; align-items:center; justify-content:center;
+            flex-shrink:0;
+        }
+        .guarantee-icon i { font-size:1.3rem; color:var(--gold); }
+        .guarantee-text strong { color:var(--white); display:block; margin-bottom:5px; font-size:0.9rem; }
+        .guarantee-text p { font-size:0.82rem; color:var(--text-muted); line-height:1.65; }
+
+        /* ── URGÊNCIA ── */
+        .urgency-section {
+            background: var(--near-black);
+            border-top: 1px solid rgba(201,168,76,0.12);
+            padding: 64px 22px;
+            text-align: center;
+        }
+        .urgency-section h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-weight: 300;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+        .urgency-section h2 em { font-style:italic; color:var(--gold); }
+        .urgency-section p {
+            font-size:0.92rem;
+            color:var(--text-muted);
+            max-width:480px;
+            margin: 0 auto 36px;
+        }
+
+        /* Contador */
+        .countdown {
+            display:flex;
+            justify-content:center;
+            gap:14px;
+            margin-bottom:36px;
+        }
+        .cd-unit { display:flex; flex-direction:column; align-items:center; gap:4px; }
+        .cd-num {
+            background: var(--charcoal);
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius:2px;
+            padding: 12px 16px;
+            font-family: var(--serif);
+            font-size:2rem;
+            font-weight:700;
+            min-width:58px;
+            text-align:center;
+            color: var(--gold);
+        }
+        .cd-label {
+            font-size:0.6rem;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:var(--text-muted);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #030303;
+            padding: 36px 22px;
+            text-align: center;
+            border-top: 1px solid rgba(201,168,76,0.08);
+        }
+        .footer-logo {
+            font-family: var(--serif);
+            font-size:1.4rem;
+            font-weight:400;
+            color:var(--white);
+            margin-bottom:14px;
+        }
+        .footer-logo em { font-style:italic; color:var(--gold); }
+        footer p { font-size:0.75rem; color:var(--text-muted); margin-bottom:5px; line-height:1.8; }
+        footer a { color:rgba(201,168,76,0.5); text-decoration:none; }
+
+        /* ── STICKY MOBILE ── */
+        .sticky-cta {
+            display:none;
+            position:fixed;
+            bottom:0; left:0; right:0;
+            background: rgba(22,18,12,0.90);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(201,168,76,0.15);
+            padding: 10px 18px 14px;
+            z-index:999;
+        }
+        .sticky-cta a {
+            display:flex; align-items:center; justify-content:center; gap:8px;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration:none;
+            font-weight:700;
+            font-size:0.76rem;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            padding:12px 20px;
+            border-radius:2px;
+            font-family: var(--sans);
+        }
+        @media(max-width:768px){
+            .sticky-cta { display:block; }
+            body { padding-bottom:70px; }
+        }
+
+        @media(max-width:600px){
+            .offer-box { padding:36px 20px; }
+            .guarantee { flex-direction:column; }
+            .hero { min-height:auto; padding:64px 22px 52px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA TOPO -->
+    <div class="alert-bar">
+        ✦ &nbsp; Acesso imediato ao guia completo &nbsp; · &nbsp; Oferta de lançamento
+    </div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-scanline"></div>
+        <div class="container hero-inner">
+            <div class="hero-eyebrow">✦ O Guia Proibido de Beleza Feminina</div>
+
+            <h1>
+                <em>Beleza</em><br>Ancestral
+            </h1>
+
+            <div class="hero-sub-title">
+                Os rituais que mulheres de outros países<br>guardam a sete chaves
+            </div>
+
+            <div class="hero-divider">
+                <div class="hero-divider-line"></div>
+                <i class="fas fa-leaf hero-divider-icon"></i>
+                <div class="hero-divider-line"></div>
+            </div>
+
+            <p class="sub">
+                Enquanto a indústria cosmética vende produtos com ingredientes que você não consegue pronunciar,
+                mulheres indianas, marroquinas e japonesas continuam usando os mesmos rituais de centenas de anos —
+                e os resultados <strong>estão nos rostos e cabelos delas</strong>.
+            </p>
+
+            <div class="btn-cta-wrap">
+                <a href="SEU_LINK_AQUI" class="btn-cta">
+                    Quero descobrir os rituais &nbsp;<i class="fas fa-arrow-right"></i>
+                </a>
+                <span class="btn-note">
+                    <i class="fas fa-lock"></i> Pagamento seguro &nbsp;·&nbsp;
+                    <i class="fas fa-bolt"></i> Acesso imediato por R$16,90
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROVA SOCIAL -->
+    <div class="social-strip">
+        <div class="stars">★★★★★</div>
+        <p><strong>+3.800 mulheres</strong> já acessaram os rituais ancestrais</p>
+    </div>
+
+    <!-- ── MISTÉRIO / DOR ── -->
+    <section class="mystery-section">
+        <div class="container fade-in">
+            <p>Você já se perguntou por que algumas mulheres têm <strong>cabelos que parecem impossíveis</strong> — densos, brilhantes, sem tratamentos químicos? Ou uma pele que envelhece de um jeito que não faz sentido com a idade?</p>
+
+            <p>A resposta não está em nenhum produto de farmácia. Não está nos cosméticos de luxo. Está em <em>rituais passados de mãe para filha</em> há séculos — em culturas que nunca precisaram da indústria cosmética para ser consideradas as mulheres mais belas do mundo.</p>
+
+            <p>A mulher indiana que passa óleo de amla nos cabelos desde os 7 anos. A mulher marroquina que usa ghassoul e água de rosas antes de dormir. A mulher japonesa que se recusa a lavar o rosto com espuma. Elas não estão fazendo isso por moda — estão fazendo porque <strong>funciona há gerações</strong>.</p>
+
+            <div class="callout">
+                "O segredo de beleza mais poderoso do mundo<br>
+                não está em nenhuma prateleira.<br>
+                Está na <em>memória ancestral</em> de outras culturas."
+            </div>
+
+            <p>O problema é que esse conhecimento nunca foi traduzido de um jeito prático, acessível e adaptado para a rotina brasileira. Até agora.</p>
+        </div>
+    </section>
+
+    <!-- ── PILARES ── -->
+    <section class="pillars-section">
+        <div class="container fade-in">
+            <span class="section-label">✦ O que está dentro do guia</span>
+            <div class="section-title">Três pilares.<br><em>Conhecimento de séculos.</em></div>
+            <p class="section-sub">Cada pilar reúne rituais de uma região do mundo — adaptados para ingredientes que você encontra no Brasil, sem abrir mão da eficácia original.</p>
+
+            <div class="pillars-grid">
+
+                <!-- PILAR 1 -->
+                <div class="pillar-card">
+                    <div class="pillar-header">
+                        <div class="pillar-num">01</div>
+                        <div class="pillar-flag">🌿</div>
+                        <div>
+                            <div class="pillar-title">Rituais <em>Capilares</em></div>
+                            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:3px;">Índia · Marrocos · África</div>
+                        </div>
+                    </div>
+                    <div class="pillar-body">
+                        <p>As mulheres com os cabelos mais densos e saudáveis do mundo não usam queratina. Elas usam rituais de óleo que fortalecem o fio desde a raiz, técnicas de massagem que reativam os folículos e ingredientes que a indústria capilar ocidental ainda está tentando sintetizar em laboratório.</p>
+                        <ul class="pillar-reveals">
+                            <li>O ritual indiano de óleo de amla + massagem craniana que ativa o crescimento capilar</li>
+                            <li>A máscara de ovo e feno-grego das mulheres do Marrocos para fios quebradiços</li>
+                            <li>O método africano de "protective styling" que preserva o comprimento enquanto fortalece</li>
+                            <li>A água de arroz fermentada das mulheres de Yao — os cabelos mais longos do mundo</li>
+                            <li>Como adaptar cada ritual para cabelos lisos, ondulados e cacheados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- PILAR 2 -->
+                <div class="pillar-card">
+                    <div class="pillar-header">
+                        <div class="pillar-num">02</div>
+                        <div class="pillar-flag">🌸</div>
+                        <div>
+                            <div class="pillar-title">Rituais de <em>Pele</em></div>
+                            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:3px;">Japão · Grécia · Ayurveda</div>
+                        </div>
+                    </div>
+                    <div class="pillar-body">
+                        <p>A mulher japonesa média tem uma pele que envergonha produtos de skincare de mil reais. O segredo não é genética — é uma filosofia de cuidado que começa de dentro e usa ingredientes que existem há milênios. Os mesmos ingredientes que a indústria ocidental agora embalou em potinhos caros e vendeu de volta para você.</p>
+                        <ul class="pillar-reveals">
+                            <li>O método de limpeza dupla japonês que remove impurezas sem agredir a barreira cutânea</li>
+                            <li>A máscara de argila ghassoul + água de rosas das mulheres marroquinas — para qualquer tipo de pele</li>
+                            <li>O ritual grego de azeite e mel que hidrata e ilumina sem nenhum produto industrializado</li>
+                            <li>O tônico ayurvédico de água de rosas e sândalo que equilibra a produção de oleosidade</li>
+                            <li>A rotina de 5 minutos que as mulheres asiáticas chamam de "skincare mínimo máximo resultado"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- PILAR 3 -->
+                <div class="pillar-card">
+                    <div class="pillar-header">
+                        <div class="pillar-num">03</div>
+                        <div class="pillar-flag">🌙</div>
+                        <div>
+                            <div class="pillar-title">Rituais de <em>Feminilidade & Energia</em></div>
+                            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:3px;">Japão · Índia · Mediterrâneo</div>
+                        </div>
+                    </div>
+                    <div class="pillar-body">
+                        <p>As culturas mais antigas do mundo não separavam beleza física de energia feminina. Elas sabiam que uma mulher em equilíbrio com seu próprio ritmo projeta uma presença que nenhum produto consegue imitar. Esses são os rituais que cuidam de dentro — e que aparecem de fora.</p>
+                        <ul class="pillar-reveals">
+                            <li>O banho de lua japonês e como ele sincroniza o ciclo feminino com a natureza</li>
+                            <li>Os óleos essenciais sagrados do Ayurveda que regulam cortisol e melhoram a qualidade da pele</li>
+                            <li>A prática mediterrânea de alimentação anti-inflamatória que as mulheres gregas usam para manter a pele jovem</li>
+                            <li>O ritual de automassagem com óleo de gergelim que ativa a circulação e a confiança corporal</li>
+                            <li>Os alimentos que mulheres de longevidade excepcional consomem diariamente — e são facilmente encontrados no Brasil</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DEPOIMENTOS ── -->
+    <section class="testimonials">
+        <div class="container fade-in">
+            <span class="section-label">✦ O que elas dizem</span>
+            <div class="section-title">Resultados que <em>aparecem</em></div>
+
+            <div class="t-grid">
+                <div class="t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-text">"Comecei o ritual capilar indiano há 3 semanas. Minha cabeleireira perguntou o que eu tinha feito no cabelo — se tinha colocado vitamina ou feito algum procedimento. Não fiz nada além do que está no guia."</p>
+                    <div class="t-author">
+                        <div class="t-avatar">R</div>
+                        <div>
+                            <div class="t-name">Renata M.</div>
+                            <div class="t-detail">Designer, 31 anos — Belo Horizonte</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-text">"A máscara de ghassoul mudou completamente minha pele oleosa. Já gastei fortunas em produtos de farmácia que não fizeram o que essa argila fez em duas semanas. O melhor é que custa quase nada."</p>
+                    <div class="t-author">
+                        <div class="t-avatar">L</div>
+                        <div>
+                            <div class="t-name">Larissa P.</div>
+                            <div class="t-detail">Professora, 28 anos — São Paulo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-text">"O que mais me surpreendeu foi o pilar de feminilidade. Achei que seria coisa esotérica mas é completamente prático. Em duas semanas meu sono melhorou, minha pele ficou mais iluminada e me sinto diferente — difícil explicar."</p>
+                    <div class="t-author">
+                        <div class="t-avatar">F</div>
+                        <div>
+                            <div class="t-name">Fernanda S.</div>
+                            <div class="t-detail">Empreendedora, 35 anos — Rio de Janeiro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── OFERTA ── -->
+    <section class="offer-section">
+        <div class="container fade-in">
+            <div class="offer-box">
+                <div class="offer-badge">✦ Oferta de lançamento</div>
+
+                <h2>Acesse o guia <em>completo</em> agora</h2>
+                <p>Três pilares, dezenas de rituais ancestrais adaptados para a rotina brasileira. Acesso imediato e permanente.</p>
+
+                <div class="price-area">
+                    <div class="price-from">Valor normal: R$ 47,00</div>
+                    <div class="price-main">
+                        <sup>R$</sup>16<sub>,90</sub>
+                    </div>
+                    <div class="price-note">pagamento único · sem mensalidade · acesso permanente</div>
+                    <div class="price-tag">✦ Você economiza R$ 30,10 hoje</div>
+                </div>
+
+                <div class="btn-cta-wrap">
+                    <a href="SEU_LINK_AQUI" class="btn-cta" style="max-width:100%;">
+                        Quero acesso imediato &nbsp;<i class="fas fa-arrow-right"></i>
+                    </a>
+                    <span class="btn-note">
+                        <i class="fas fa-lock"></i> Pagamento 100% seguro &nbsp;·&nbsp;
+                        <i class="fas fa-bolt"></i> Acesso em segundos
+                    </span>
+                </div>
+
+                <div class="guarantee">
+                    <div class="guarantee-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="guarantee-text">
+                        <strong>Garantia de 7 dias</strong>
+                        <p>Aplique qualquer ritual do guia por 7 dias. Se você não perceber uma diferença visível nos seus cabelos ou pele, devolvemos 100% do seu investimento — sem perguntas e sem burocracia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── URGÊNCIA ── -->
+    <section class="urgency-section">
+        <div class="container fade-in">
+            <h2>Cada dia sem o ritual<br>é um dia a mais <em>sem resultado</em></h2>
+            <p>Os rituais ancestrais funcionam por acumulação — quanto antes você começa, mais rápido você vê a diferença.</p>
+
+            <div class="countdown" id="countdown">
+                <div class="cd-unit">
+                    <div class="cd-num" id="cd-h">00</div>
+                    <div class="cd-label">horas</div>
+                </div>
+                <div class="cd-unit">
+                    <div class="cd-num" id="cd-m">00</div>
+                    <div class="cd-label">minutos</div>
+                </div>
+                <div class="cd-unit">
+                    <div class="cd-num" id="cd-s">00</div>
+                    <div class="cd-label">segundos</div>
+                </div>
+            </div>
+
+            <div class="btn-cta-wrap">
+                <a href="SEU_LINK_AQUI" class="btn-cta">
+                    Garantir meu acesso por R$16,90 &nbsp;<i class="fas fa-arrow-right"></i>
+                </a>
+                <span class="btn-note" style="color:rgba(255,255,255,0.35);">
+                    <i class="fas fa-lock"></i> Ambiente 100% seguro
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-logo">Aurea<em>Femme</em></div>
+        <p>Ao clicar no botão você será redirecionada para nossa plataforma de pagamento 100% segura.</p>
+        <p>© 2026 Beleza Ancestral · AureaFemme. Todos os direitos reservados.<br>
+        <a href="#">Termos de Uso</a> &nbsp;·&nbsp; <a href="#">Política de Privacidade</a></p>
+    </footer>
+
+    <!-- STICKY MOBILE -->
+    <div class="sticky-cta">
+        <a href="SEU_LINK_AQUI">
+            <i class="fas fa-leaf"></i> &nbsp;Acessar os rituais — R$16,90
+        </a>
+    </div>
+
+    <script>
+        // Countdown 3h
+        const endTime = Date.now() + 3 * 60 * 60 * 1000;
+        function tick() {
+            const diff = Math.max(0, endTime - Date.now());
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+            document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+            document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+        }
+        tick(); setInterval(tick, 1000);
+
+        // Fade in scroll
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>
